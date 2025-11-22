@@ -1,7 +1,62 @@
+import { useState } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Check, Copy } from "lucide-react";
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
+
+const CodeBlock = ({ code, codeLanguage }: { code: string; codeLanguage: string }) => {
+  const [isCopied, setIsCopied] = useState(false);
+  const { language } = useLanguage();
+
+
+  const handleCopy = async () => {
+    try {
+      await navigator.clipboard.writeText(code);
+      setIsCopied(true);
+      setTimeout(() => setIsCopied(false), 2000);
+    } catch (err) {
+      console.error("Failed to copy:", err);
+    }
+  };
+
+  return (
+    <div className="relative group rounded-lg overflow-hidden border border-white/10">
+      <button
+        onClick={handleCopy}
+        className="absolute top-3 right-3 z-10 p-2 rounded-md bg-black/50 hover:bg-black/80 text-muted-foreground hover:text-white transition-all backdrop-blur-sm opacity-0 group-hover:opacity-100 focus:opacity-100 border border-white/10"
+        title={language === 'en' ? "Copy to clipboard" : 'Copiar para a área de transferência'}
+      >
+        {isCopied ? (
+          <Check className="h-4 w-4 text-green-400" />
+        ) : (
+          <Copy className="h-4 w-4" />
+        )}
+      </button>
+
+      {/* Renderizador de Código Colorido */}
+      <div className="text-sm">
+        <SyntaxHighlighter
+          language={codeLanguage}
+          style={vscDarkPlus}
+          customStyle={{
+            margin: 0,
+            padding: '1.5rem',
+            background: '#09090b',
+            fontSize: '0.875rem',
+            lineHeight: '1.5',
+          }}
+          wrapLines={true}
+        >
+          {code}
+        </SyntaxHighlighter>
+      </div>
+    </div>
+  );
+};
 
 export const CodeExample = () => {
   const { t } = useLanguage();
@@ -59,22 +114,20 @@ function App() {
           viewport={{ once: true }}
           className="max-w-4xl mx-auto"
         >
-          <Card className="border-border/50 bg-card/50 backdrop-blur">
+          <Card className="border-border/50 bg-card/50 backdrop-blur shadow-2xl">
             <CardContent className="p-4 sm:p-6">
               <Tabs defaultValue="install" className="w-full">
-                <TabsList className="grid w-full grid-cols-2">
+                <TabsList className="grid w-full grid-cols-2 mb-6">
                   <TabsTrigger value="install" className="text-xs sm:text-sm">{t('code.step1')}</TabsTrigger>
                   <TabsTrigger value="usage" className="text-xs sm:text-sm">{t('code.step2')}</TabsTrigger>
                 </TabsList>
-                <TabsContent value="install" className="mt-4 sm:mt-6">
-                  <pre className="bg-muted rounded-lg p-4 sm:p-6 overflow-x-auto">
-                    <code className="text-xs sm:text-sm text-foreground">{installCode}</code>
-                  </pre>
+                
+                <TabsContent value="install" className="mt-0">
+                  <CodeBlock code={installCode} codeLanguage="bash" />
                 </TabsContent>
-                <TabsContent value="usage" className="mt-4 sm:mt-6">
-                  <pre className="bg-muted rounded-lg p-4 sm:p-6 overflow-x-auto">
-                    <code className="text-xs sm:text-sm text-foreground">{usageCode}</code>
-                  </pre>
+                
+                <TabsContent value="usage" className="mt-0">
+                  <CodeBlock code={usageCode} codeLanguage="tsx" />
                 </TabsContent>
               </Tabs>
             </CardContent>

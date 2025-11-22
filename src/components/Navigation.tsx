@@ -124,7 +124,7 @@ export const Navigation = () => {
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <SheetHeader>
                 <SheetTitle className="text-left flex items-center gap-2">
-                  <div className="h-7 w-7 rounded-md bg-primary flex items-center justify-center text-white text-xs">💬</div>
+                  <div className="h-7 w-7 rounded-md bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs">💬</div>
                   EasyChat
                 </SheetTitle>
               </SheetHeader>

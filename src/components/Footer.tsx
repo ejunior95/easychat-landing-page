@@ -1,5 +1,4 @@
 import { useLanguage } from "@/contexts/LanguageContext";
-import { Github, Twitter } from "lucide-react";
 
 export const Footer = () => {
   const { t } = useLanguage();
@@ -18,16 +17,6 @@ export const Footer = () => {
             <p className="text-sm text-muted-foreground">
               The secure, plug-and-play AI Chat Widget for React.
             </p>
-            <div className="flex gap-4">
-              <a 
-                href="https://github.com/ejunior95/easy-chat" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Github className="h-5 w-5" />
-              </a>
-            </div>
           </div>
 
           <div>
@@ -42,7 +31,6 @@ export const Footer = () => {
           <div>
             <h4 className="font-semibold mb-4">{t('footer.developers')}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
-              <li><a href="https://github.com/ejunior95/easy-chat" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t('footer.github')}</a></li>
               <li><a href="https://www.npmjs.com/package/@ejunior95/easy-chat" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t('footer.npm')}</a></li>
             </ul>
           </div>
@@ -51,7 +39,6 @@ export const Footer = () => {
             <h4 className="font-semibold mb-4">{t('footer.company')}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="#" className="hover:text-foreground transition-colors">{t('footer.about')}</a></li>
-              <li><a href="#" className="hover:text-foreground transition-colors">{t('footer.blog')}</a></li>
               <li><a href="#" className="hover:text-foreground transition-colors">{t('footer.contact')}</a></li>
             </ul>
           </div>
