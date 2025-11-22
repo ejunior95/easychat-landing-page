@@ -2,7 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-chat.jpg";
+import heroImage from "@/assets/hero-chat.png";
 
 export const Hero = () => {
   const { t } = useLanguage();
@@ -13,7 +13,7 @@ export const Hero = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-8">
       {/* Animated background gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
@@ -61,13 +61,13 @@ export const Hero = () => {
                 className="bg-primary text-primary-foreground hover:opacity-90 shadow-glow group w-full sm:w-auto"
               >
                 {t('hero.cta.primary')}
-                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="ml-1 h-6 w-6 group-hover:translate-x-2 transition-transform" />
               </Button>
               <Button 
                 size="lg" 
                 variant="outline"
                 onClick={() => window.open('https://www.npmjs.com/package/@ejunior95/easy-chat', '_blank')}
-                className="w-full sm:w-auto"
+                className="w-full sm:w-auto border-primary"
               >
                 {t('hero.cta.secondary')}
               </Button>
@@ -80,16 +80,16 @@ export const Hero = () => {
               className="flex flex-wrap items-center gap-4 sm:gap-8 pt-6 sm:pt-8"
             >
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs sm:text-sm text-muted-foreground">TypeScript</span>
+                <div className="h-4 w-4 rounded-full bg-primary" />
+                <span className="text-xs sm:text-sm">TypeScript</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-secondary animate-pulse" />
-                <span className="text-xs sm:text-sm text-muted-foreground">React 18+</span>
+                <div className="h-4 w-4 rounded-full bg-secondary" />
+                <span className="text-xs sm:text-sm">React 18+</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
-                <span className="text-xs sm:text-sm text-muted-foreground">Open Source</span>
+                <div className="h-4 w-4 rounded-full bg-green-600" />
+                <span className="text-xs sm:text-sm">Open Source</span>
               </div>
             </motion.div>
           </motion.div>
@@ -100,13 +100,12 @@ export const Hero = () => {
             transition={{ duration: 0.7, delay: 0.4 }}
             className="relative"
           >
-            <div className="relative rounded-2xl overflow-hidden shadow-card border border-border/50">
+            <div className="relative rounded-2xl overflow-hidden border border-border/50">
               <img 
                 src={heroImage} 
                 alt="EasyChat Interface" 
                 className="w-full h-auto"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
             </div>
             {/* Decorative elements */}
             <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-primary/20 blur-3xl" />

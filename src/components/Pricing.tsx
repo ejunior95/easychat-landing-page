@@ -54,7 +54,7 @@ export const Pricing = () => {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               viewport={{ once: true }}
             >
-              <Card className={`h-full ${plan.isPro ? 'border-primary shadow-glow' : 'border-border/50'} bg-card/50 backdrop-blur`}>
+              <Card className={`h-full ${plan.isPro ? 'border-primary shadow-glow' : 'border-muted-foreground/50'} bg-card/50 backdrop-blur`}>
                 <CardHeader>
                   <CardTitle className="text-2xl">{t(plan.titleKey)}</CardTitle>
                   <div className="flex items-baseline gap-1 mt-4">

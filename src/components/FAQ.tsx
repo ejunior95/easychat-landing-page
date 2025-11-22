@@ -15,7 +15,7 @@ export const FAQ = () => {
 
   return (
     <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted-foreground/20 to-background" />
       
       <div className="container relative z-10 mx-auto px-4 max-w-7xl">
         <motion.div
@@ -40,7 +40,7 @@ export const FAQ = () => {
               <AccordionItem 
                 key={index} 
                 value={`item-${index}`}
-                className="border border-border/50 rounded-lg px-4 sm:px-6 bg-card/50 backdrop-blur"
+                className="border border-muted-foreground/15 rounded-lg px-4 sm:px-6 bg-card/50"
               >
                 <AccordionTrigger className="text-left hover:no-underline text-sm sm:text-base py-4">
                   {t(faq.q)}

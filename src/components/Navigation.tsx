@@ -21,7 +21,7 @@ export const Navigation = () => {
       <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
         <div className="flex items-center gap-2">
           <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-gradient-primary flex items-center justify-center font-bold text-background text-sm">
-            EC
+            <span>💬</span>
           </div>
           <span className="text-lg sm:text-xl font-bold">EasyChat</span>
         </div>
@@ -29,13 +29,13 @@ export const Navigation = () => {
         <div className="hidden lg:flex items-center gap-8">
           <button 
             onClick={() => scrollToSection('features')}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium hover:text-[#17D1F7] transition-colors"
           >
             {t('nav.features')}
           </button>
           <button 
             onClick={() => scrollToSection('pricing')}
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium hover:text-[#17D1F7] transition-colors"
           >
             {t('nav.pricing')}
           </button>
@@ -43,7 +43,7 @@ export const Navigation = () => {
             href="https://www.npmjs.com/package/@ejunior95/easy-chat"
             target="_blank"
             rel="noopener noreferrer"
-            className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+            className="text-sm font-medium hover:text-[#17D1F7] transition-colors"
           >
             {t('nav.docs')}
           </a>
