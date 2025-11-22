@@ -35,17 +35,17 @@ export const Navigation = () => {
       <DropdownMenuTrigger asChild>
         <Button variant="ghost" size="sm" className="gap-2">
           <Globe className="h-4 w-4" />
-          <span className="uppercase">{language}</span>
+          <span className="uppercase">{language === 'en' ? 'EN' : 'PT-BR'}</span>
         </Button>
       </DropdownMenuTrigger>
       <DropdownMenuContent align="end">
-        <DropdownMenuItem onClick={() => setLanguage('pt')} className="gap-2">
-          <span className={language === 'pt' ? "opacity-100" : "opacity-0"}><Check className="h-4 w-4" /></span>
-          Português (BR)
-        </DropdownMenuItem>
         <DropdownMenuItem onClick={() => setLanguage('en')} className="gap-2">
           <span className={language === 'en' ? "opacity-100" : "opacity-0"}><Check className="h-4 w-4" /></span>
-          English (EN)
+          EN (English)
+        </DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setLanguage('pt')} className="gap-2">
+          <span className={language === 'pt' ? "opacity-100" : "opacity-0"}><Check className="h-4 w-4" /></span>
+          PT-BR (Portuguese)
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
