@@ -1,0 +1,118 @@
+import { Button } from "@/components/ui/button";
+import { useLanguage } from "@/contexts/LanguageContext";
+import { ArrowRight, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
+import heroImage from "@/assets/hero-chat.jpg";
+
+export const Hero = () => {
+  const { t } = useLanguage();
+
+  const scrollToSection = (id: string) => {
+    const element = document.getElementById(id);
+    element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  return (
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-16">
+      {/* Animated background gradient */}
+      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background" />
+      
+      <div className="container relative z-10 mx-auto px-4 py-32">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.2 }}
+            className="space-y-8"
+          >
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.3 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 border border-primary/20"
+            >
+              <Sparkles className="h-4 w-4 text-primary" />
+              <span className="text-sm font-medium text-primary">{t('hero.badge')}</span>
+            </motion.div>
+
+            <div className="space-y-4">
+              <h1 className="text-5xl md:text-7xl font-bold leading-tight">
+                {t('hero.title')}
+                <br />
+                <span className="bg-gradient-primary bg-clip-text text-transparent">
+                  {t('hero.subtitle')}
+                </span>
+              </h1>
+              <p className="text-xl text-muted-foreground max-w-xl">
+                {t('hero.description')}
+              </p>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.5 }}
+              className="flex flex-col sm:flex-row gap-4"
+            >
+              <Button 
+                size="lg" 
+                onClick={() => scrollToSection('get-started')}
+                className="bg-primary text-primary-foreground hover:opacity-90 shadow-glow group"
+              >
+                {t('hero.cta.primary')}
+                <ArrowRight className="ml-2 h-4 w-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button 
+                size="lg" 
+                variant="outline"
+                onClick={() => window.open('https://www.npmjs.com/package/@ejunior95/easy-chat', '_blank')}
+              >
+                {t('hero.cta.secondary')}
+              </Button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.7 }}
+              className="flex items-center gap-8 pt-8"
+            >
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-sm text-muted-foreground">TypeScript</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-secondary animate-pulse" />
+                <span className="text-sm text-muted-foreground">React 18+</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <div className="h-2 w-2 rounded-full bg-primary animate-pulse" />
+                <span className="text-sm text-muted-foreground">Open Source</span>
+              </div>
+            </motion.div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+            className="relative"
+          >
+            <div className="relative rounded-2xl overflow-hidden shadow-card border border-border/50">
+              <img 
+                src={heroImage} 
+                alt="EasyChat Interface" 
+                className="w-full h-auto"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+            </div>
+            {/* Decorative elements */}
+            <div className="absolute -top-4 -right-4 h-24 w-24 rounded-full bg-primary/20 blur-3xl" />
+            <div className="absolute -bottom-4 -left-4 h-32 w-32 rounded-full bg-secondary/20 blur-3xl" />
+          </motion.div>
+        </div>
+      </div>
+    </section>
+  );
+};
