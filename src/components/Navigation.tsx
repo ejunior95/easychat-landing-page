@@ -18,15 +18,15 @@ export const Navigation = () => {
       transition={{ duration: 0.5 }}
       className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg"
     >
-      <div className="container mx-auto flex h-16 items-center justify-between px-4">
+      <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
         <div className="flex items-center gap-2">
-          <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center font-bold text-background">
+          <div className="h-7 w-7 sm:h-8 sm:w-8 rounded-lg bg-gradient-primary flex items-center justify-center font-bold text-background text-sm">
             EC
           </div>
-          <span className="text-xl font-bold">EasyChat</span>
+          <span className="text-lg sm:text-xl font-bold">EasyChat</span>
         </div>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden lg:flex items-center gap-8">
           <button 
             onClick={() => scrollToSection('features')}
             className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -49,17 +49,21 @@ export const Navigation = () => {
           </a>
         </div>
 
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-2 sm:gap-3">
           <Button
             variant="ghost"
             size="icon"
             onClick={() => setLanguage(language === 'en' ? 'pt' : 'en')}
-            className="rounded-full"
+            className="rounded-full h-9 w-9"
           >
             <Globe className="h-4 w-4" />
           </Button>
-          <Button onClick={() => scrollToSection('get-started')} className="bg-primary text-primary-foreground hover:opacity-90">
-            {t('nav.getStarted')}
+          <Button 
+            onClick={() => scrollToSection('get-started')} 
+            className="bg-primary text-primary-foreground hover:opacity-90 h-9 px-3 sm:px-4 text-sm"
+          >
+            <span className="hidden sm:inline">{t('nav.getStarted')}</span>
+            <span className="sm:hidden">Start</span>
           </Button>
         </div>
       </div>
