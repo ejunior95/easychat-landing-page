@@ -11,7 +11,7 @@ export const Footer = () => {
           <div className="space-y-4">
             <div className="flex items-center gap-2">
               <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center font-bold text-background">
-                EC
+                <span>💬</span>
               </div>
               <span className="text-xl font-bold">EasyChat</span>
             </div>
@@ -26,14 +26,6 @@ export const Footer = () => {
                 className="text-muted-foreground hover:text-foreground transition-colors"
               >
                 <Github className="h-5 w-5" />
-              </a>
-              <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-              >
-                <Twitter className="h-5 w-5" />
               </a>
             </div>
           </div>
