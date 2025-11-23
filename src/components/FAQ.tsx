@@ -14,7 +14,7 @@ export const FAQ = () => {
   ];
 
   return (
-    <section className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+    <section id="faq" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted-foreground/20 to-background" />
       
       <div className="container relative z-10 mx-auto px-4 max-w-7xl">

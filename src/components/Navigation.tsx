@@ -22,28 +22,23 @@ export const Navigation = () => {
   const { language, setLanguage, t } = useLanguage();
   const [isOpen, setIsOpen] = useState(false);
 
-  // Hooks de roteamento
   const location = useLocation();
   const navigate = useNavigate();
 
-  // Função de navegação inteligente
   const handleNavigation = (target: string) => {
     setIsOpen(false);
 
-    // Se for link externo (começa com http)
     if (target.startsWith('http')) {
       window.open(target, '_blank');
       return;
     }
 
-    // Se for rota interna (/about ou /contact)
     if (target.startsWith('/')) {
       navigate(target);
       window.scrollTo(0, 0);
       return;
     }
 
-    // Se for âncora (#pricing)
     if (location.pathname !== '/') {
       navigate('/');
       setTimeout(() => {
@@ -56,7 +51,6 @@ export const Navigation = () => {
     }
   };
 
-  // Componente do Seletor de Idioma (Reutilizável)
   const LanguageSelector = () => (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -87,10 +81,22 @@ export const Navigation = () => {
         {t('nav.features')}
       </button>
       <button
+        onClick={() => handleNavigation('get-started')}
+        className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
+      >
+        {t('nav.getStarted')}
+      </button>
+      <button
         onClick={() => handleNavigation('pricing')}
         className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
       >
         {t('nav.pricing')}
+      </button>
+      <button
+        onClick={() => handleNavigation('faq')}
+        className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
+      >
+        {t('nav.faq')}
       </button>
       <button 
         onClick={() => handleNavigation('/about')}
@@ -124,7 +130,7 @@ export const Navigation = () => {
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
         {/* Logo */}
-        <div className="flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>
+        <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation('/')}>
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-sm shadow-lg">
             <span>💬</span>
           </div>
@@ -142,12 +148,6 @@ export const Navigation = () => {
         <div className="hidden lg:flex items-center gap-3">
           <LanguageSelector />
           <div className="w-px h-6 bg-border/50 mx-1" />
-          <Button
-            onClick={() => scrollToSection('get-started')}
-            className="bg-primary text-primary-foreground hover:opacity-90 shadow-glow"
-          >
-            {t('nav.getStarted')}
-          </Button>
         </div>
 
         {/* Mobile Menu Toggle */}
@@ -171,13 +171,6 @@ export const Navigation = () => {
                 <div className="flex flex-col gap-4 items-start">
                   <NavLinks mobile />
                 </div>
-                <div className="h-px w-full bg-border" />
-                <Button
-                  onClick={() => scrollToSection('get-started')}
-                  className="w-full bg-primary shadow-glow"
-                >
-                  {t('nav.getStarted')}
-                </Button>
               </div>
             </SheetContent>
           </Sheet>

@@ -14,6 +14,7 @@ const translations = {
     'nav.features': 'Features',
     'nav.pricing': 'Pricing',
     'nav.docs': 'Documentation',
+    'nav.faq': 'FAQ',
     'nav.getStarted': 'Get Started',
     
     // Hero
@@ -120,6 +121,7 @@ const translations = {
     'nav.features': 'Recursos',
     'nav.pricing': 'Preços',
     'nav.docs': 'Documentação',
+    'nav.faq': 'FAQ',
     'nav.getStarted': 'Começar',
     
     // Hero
@@ -226,7 +228,7 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('en');
+  const [language, setLanguage] = useState<Language>('pt');
 
   const t = (key: string): string => {
     return translations[language][key] || key;
