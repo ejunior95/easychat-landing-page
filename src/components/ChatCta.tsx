@@ -22,13 +22,13 @@ const { language } = useLanguage();
 
         {/* Seta Pulando (Loop Infinito) */}
         <motion.div
-          animate={{ y: [0, 10, 0] }} // Movimento suave de pulo
+          animate={{ y: [0, 15, 0] }}
           transition={{ 
             repeat: Infinity, 
             duration: 2,
             ease: "easeInOut",
           }}
-          className="mr-6 drop-shadow-lg" 
+          className="mr-[0.85rem] drop-shadow-lg" 
         >
           <ArrowDown className="h-8 w-8 text-primary" strokeWidth={3} />
         </motion.div>

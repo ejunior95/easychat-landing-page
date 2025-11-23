@@ -74,13 +74,13 @@ export const Pricing = () => {
             <CardHeader>
               <CardTitle className="text-2xl text-primary">{t('pricing.pro.title')}</CardTitle>
               <CardDescription>{t('pricing.pro.desc')}</CardDescription>
-              <div className="mt-6 flex flex-col">
-                <div className="flex items-baseline gap-1">
-                  <span className="text-4xl font-bold">
-                    {language === 'pt' ? 'R$ 20' : '$19'}
-                  </span>
-                  <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full">
+              <div className="mt-6 flex flex-col justify-start items-start">
+                  <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full w-1/2 flex items-center justify-center">
                     {t('pricing.pro.period')}
+                  </span>
+                <div className="flex items-baseline gap-1">
+                  <span className="text-5xl font-bold">
+                    {language === 'pt' ? 'R$ 49,90' : '$19,90'}
                   </span>
                 </div>
               </div>
