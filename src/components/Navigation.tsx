@@ -86,12 +86,12 @@ export const Navigation = () => {
       >
         {t('nav.getStarted')}
       </button>
-      <button
+      {/* <button
         onClick={() => handleNavigation('pricing')}
         className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
       >
         {t('nav.pricing')}
-      </button>
+      </button> */}
       <button
         onClick={() => handleNavigation('faq')}
         className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}

@@ -1,7 +1,17 @@
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Footer = () => {
   const { t } = useLanguage();
+
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleNavigation = (target: string) => {
+    navigate(target);
+    window.scrollTo(0, 0);
+    return;
+  };
 
   return (
     <footer className="border-t border-border/50 bg-muted/30 backdrop-blur">
@@ -23,7 +33,8 @@ export const Footer = () => {
             <h4 className="font-semibold mb-4">{t('footer.product')}</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
               <li><a href="#features" className="hover:text-foreground transition-colors">{t('footer.features')}</a></li>
-              <li><a href="#pricing" className="hover:text-foreground transition-colors">{t('footer.pricing')}</a></li>
+              {/* <li><a href="#pricing" className="hover:text-foreground transition-colors">{t('footer.pricing')}</a></li> */}
+              <li><a href="#faq" className="hover:text-foreground transition-colors">{t('footer.faq')}</a></li>
               <li><a href="https://www.npmjs.com/package/@ejunior95/easy-chat" target="_blank" rel="noopener noreferrer" className="hover:text-foreground transition-colors">{t('footer.documentation')}</a></li>
             </ul>
           </div>

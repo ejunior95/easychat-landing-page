@@ -87,6 +87,7 @@ const translations = {
     'footer.product': 'Product',
     'footer.features': 'Features',
     'footer.pricing': 'Pricing',
+    'footer.faq': 'FAQ',
     'footer.documentation': 'Documentation',
     'footer.developers': 'Developers',
     'footer.github': 'GitHub',
@@ -194,6 +195,7 @@ const translations = {
     'footer.product': 'Produto',
     'footer.features': 'Recursos',
     'footer.pricing': 'Preços',
+    'footer.faq': 'FAQ',
     'footer.documentation': 'Documentação',
     'footer.developers': 'Desenvolvedores',
     'footer.github': 'GitHub',
@@ -228,7 +230,7 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('pt');
+  const [language, setLanguage] = useState<Language>('en');
 
   const t = (key: string): string => {
     return translations[language][key] || key;

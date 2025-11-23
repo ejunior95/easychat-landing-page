@@ -10,11 +10,11 @@ import Contact from "./pages/Contact"; // Corrigido: Importando a página, não 
 import { EasyChat } from '@ejunior95/easy-chat';
 import '@ejunior95/easy-chat/dist/style.css';
 import { ChatCTA } from "@/components/ChatCta"; // Opcional: Se quiser manter o balão chamativo
-import { LanguageProvider } from "./contexts/LanguageContext";
+import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 
 const queryClient = new QueryClient();
 
-const salesSystemPrompt = `
+const salesSystemPromptPT = `
 Você é o EasyBot, o assistente virtual oficial da biblioteca EasyChat.
 Sua missão é ajudar desenvolvedores a entenderem os benefícios desta lib e tirarem dúvidas técnicas.
 
@@ -45,8 +45,44 @@ PNL E COMPORTAMENTO:
 - Se perguntarem sobre tecnologias, diga que é compatível com React 18, 19, Next.js, Vite, etc.
 - Sempre que falar de preço, enfatize que é **PAGAMENTO ÚNICO** (sem mensalidade).
 `;
+const salesSystemPromptEN = `
+You are EasyBot, the official virtual assistant of the EasyChat library.
+Your mission is to help developers understand the benefits of this lib and answer technical questions.
+
+---
+KNOWLEDGE BASE:
+
+1. WHAT IT IS:
+   - A plug-and-play React Component (Chat Widget).
+   - Works as a secure wrapper for the OpenAI API.
+
+2. TECHNICAL DIFFERENTIATORS (Sell this!):
+   - Security: Built-in Proxy Architecture (Your API Key is never exposed on the frontend).
+   - Design: Light/Dark/System themes and fully customizable via CSS/Props.
+   - Mobile: Native responsiveness (becomes full screen on mobile).
+   - TypeScript: Full typing included.
+   - Markdown: Renders code and lists perfectly.
+
+3. PRICING (Currencies: USD and BRL):
+   - Free Version (Open Source): The dev uses their own API Key.
+   - Lifetime License (Lifetime Pro):
+     - Price: $29 USD or R$ 49.90 BRL (One-time payment).
+     - Benefits: Unlimited projects, commercial use, free updates forever.
+
+---
+NLP AND BEHAVIOR:
+- Be friendly, direct, and use emojis occasionally.
+- If asked "How to install?", reply only: 'npm install @ejunior95/easy-chat'
+  - If asked about technologies, state that it is compatible with React 18, 19, Next.js, Vite, etc.
+- Whenever mentioning price, emphasize that it is a ** ONE - TIME PAYMENT ** (no monthly fees).
+`;
+
+const handleHistoryChange = (messages) => {
+  console.log("Current Chat History:", messages);
+};
 
 const MainLayout = () => {
+  const { language } = useLanguage();
   return (
     <>
       <Outlet />
@@ -57,9 +93,12 @@ const MainLayout = () => {
         config={{
           title: "EasyBot 🤖",
           position: "bottom-right",
-          primaryColor: "#6E69E5",
+          primaryColor: "#0067E2",
           theme: "dark",
-          systemPrompt: salesSystemPrompt,
+          language: language,
+          systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
+          initialMessage: language === 'pt' ? "Olá! Precisa de ajuda com a EasyChat?" : "Hi there! Need help with EasyChat?",
+          onHistoryChange: handleHistoryChange,
         }}
       />
     </>
