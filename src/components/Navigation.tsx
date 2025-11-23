@@ -16,16 +16,43 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export const Navigation = () => {
   const { language, setLanguage, t } = useLanguage();
-  const [isOpen, setIsOpen] = useState(false); // Estado do menu mobile
+  const [isOpen, setIsOpen] = useState(false);
 
-  const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-      setIsOpen(false); // Fecha o menu mobile ao clicar
+  // Hooks de roteamento
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  // Função de navegação inteligente
+  const handleNavigation = (target: string) => {
+    setIsOpen(false);
+
+    // Se for link externo (começa com http)
+    if (target.startsWith('http')) {
+      window.open(target, '_blank');
+      return;
+    }
+
+    // Se for rota interna (/about ou /contact)
+    if (target.startsWith('/')) {
+      navigate(target);
+      window.scrollTo(0, 0);
+      return;
+    }
+
+    // Se for âncora (#pricing)
+    if (location.pathname !== '/') {
+      navigate('/');
+      setTimeout(() => {
+        const element = document.getElementById(target);
+        element?.scrollIntoView({ behavior: 'smooth' });
+      }, 100);
+    } else {
+      const element = document.getElementById(target);
+      element?.scrollIntoView({ behavior: 'smooth' });
     }
   };
 
@@ -53,31 +80,43 @@ export const Navigation = () => {
 
   const NavLinks = ({ mobile = false }) => (
     <>
-      <button 
-        onClick={() => scrollToSection('features')}
+      <button
+        onClick={() => handleNavigation('features')}
         className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
       >
         {t('nav.features')}
       </button>
-      <button 
-        onClick={() => scrollToSection('pricing')}
+      <button
+        onClick={() => handleNavigation('pricing')}
         className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
       >
         {t('nav.pricing')}
       </button>
-      <a 
-        href="https://www.npmjs.com/package/@ejunior95/easy-chat"
-        target="_blank"
-        rel="noopener noreferrer"
+      <button 
+        onClick={() => handleNavigation('/about')}
+        className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
+      >
+        {language === 'pt' ? 'Sobre' : 'About'}
+      </button>
+      
+      <button 
+        onClick={() => handleNavigation('/contact')}
+        className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
+      >
+        {language === 'pt' ? 'Contato' : 'Contact'}
+      </button>
+
+      <button 
+        onClick={() => handleNavigation('https://www.npmjs.com/package/@ejunior95/easy-chat')}
         className={`text-sm font-medium hover:text-primary transition-colors ${mobile ? 'text-lg py-2' : ''}`}
       >
         {t('nav.docs')}
-      </a>
+      </button>
     </>
   );
 
   return (
-    <motion.nav 
+    <motion.nav
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
@@ -103,8 +142,8 @@ export const Navigation = () => {
         <div className="hidden lg:flex items-center gap-3">
           <LanguageSelector />
           <div className="w-px h-6 bg-border/50 mx-1" />
-          <Button 
-            onClick={() => scrollToSection('get-started')} 
+          <Button
+            onClick={() => scrollToSection('get-started')}
             className="bg-primary text-primary-foreground hover:opacity-90 shadow-glow"
           >
             {t('nav.getStarted')}
@@ -114,7 +153,7 @@ export const Navigation = () => {
         {/* Mobile Menu Toggle */}
         <div className="lg:hidden flex items-center gap-2">
           <LanguageSelector /> {/* Idioma aparece no mobile tbm fora do menu */}
-          
+
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="ghost" size="icon">
@@ -133,8 +172,8 @@ export const Navigation = () => {
                   <NavLinks mobile />
                 </div>
                 <div className="h-px w-full bg-border" />
-                <Button 
-                  onClick={() => scrollToSection('get-started')} 
+                <Button
+                  onClick={() => scrollToSection('get-started')}
                   className="w-full bg-primary shadow-glow"
                 >
                   {t('nav.getStarted')}

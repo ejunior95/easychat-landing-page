@@ -96,6 +96,24 @@ const translations = {
     'footer.blog': 'Blog',
     'footer.contact': 'Contact',
     'footer.rights': 'All rights reserved.',
+
+    // About
+    'about.title': 'About Us',
+    'about.subtitle': 'Our Mission',
+    'about.story.title': 'Our Story',
+    'about.story.p1': 'EasyChat was born from a real need. As developers, we were tired of complex integrations just to put a simple AI chat on our clients\' websites.',
+    'about.story.p2': 'We wanted something that was plug-and-play, secure by default, and fully customizable without fighting against the library.',
+    'about.values.title': 'Our Values',
+    'about.values.1': 'Simplicity First',
+    'about.values.2': 'Developer Experience',
+    'about.values.3': 'Privacy & Security',
+
+    // Contact
+    'contact.title': 'Get in Touch',
+    'contact.subtitle': 'We\'d love to hear from you',
+    'contact.whatsapp': 'Chat on WhatsApp',
+    'contact.email': 'Send an Email',
+    'contact.desc': 'Have a question about the Lifetime License or need technical support?',
   },
   pt: {
     // Nav
@@ -184,6 +202,24 @@ const translations = {
     'footer.blog': 'Blog',
     'footer.contact': 'Contato',
     'footer.rights': 'Todos os direitos reservados.',
+
+    // About
+    'about.title': 'Sobre Nós',
+    'about.subtitle': 'Nossa Missão',
+    'about.story.title': 'Nossa História',
+    'about.story.p1': 'O EasyChat nasceu de uma necessidade real. Como desenvolvedores, estávamos cansados de integrações complexas apenas para colocar um chat de IA simples nos sites dos nossos clientes.',
+    'about.story.p2': 'Queríamos algo que fosse plug-and-play, seguro por padrão e totalmente personalizável sem precisar lutar contra a biblioteca.',
+    'about.values.title': 'Nossos Valores',
+    'about.values.1': 'Simplicidade Primeiro',
+    'about.values.2': 'Experiência do Desenvolvedor',
+    'about.values.3': 'Privacidade e Segurança',
+
+    // Contact
+    'contact.title': 'Entre em Contato',
+    'contact.subtitle': 'Adoraríamos falar com você',
+    'contact.whatsapp': 'Conversar no WhatsApp',
+    'contact.email': 'Enviar um Email',
+    'contact.desc': 'Tem alguma dúvida sobre a Licença Vitalícia ou precisa de suporte técnico?',
   },
 };
 
