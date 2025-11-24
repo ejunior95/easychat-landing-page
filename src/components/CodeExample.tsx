@@ -136,6 +136,8 @@ function App() {
         config={{
           ...config,
           systemPrompt: "You are a playground bot. Keep answers short.",
+          // @ts-ignore
+          isPlayground: true,
         }} 
       />
 
@@ -280,10 +282,10 @@ function App() {
 
             <Card className="border-border/50 bg-card/50 backdrop-blur shadow-2xl h-auto lg:h-full flex flex-col">
               <CardContent className="p-4 sm:p-6 flex-1">
-                <Tabs defaultValue="usage" className="w-full h-full flex flex-col">
+                <Tabs defaultValue="install" className="w-full h-full flex flex-col">
                   <TabsList className="grid w-full grid-cols-2 mb-6">
-                    <TabsTrigger value="usage" className="text-xs sm:text-sm">{t('code.step2')}</TabsTrigger>
                     <TabsTrigger value="install" className="text-xs sm:text-sm">{t('code.step1')}</TabsTrigger>
+                    <TabsTrigger value="usage" className="text-xs sm:text-sm">{t('code.step2')}</TabsTrigger>
                   </TabsList>
                   
                   <TabsContent value="install" className="mt-0">
