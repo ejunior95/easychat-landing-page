@@ -11,6 +11,7 @@ import { EasyChat } from '@ejunior95/easy-chat';
 import '@ejunior95/easy-chat/dist/style.css';
 import { ChatCTA } from "@/components/ChatCta";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
@@ -112,6 +113,7 @@ const App = () => (
     <TooltipProvider>
       <Toaster />
       <Sonner />
+      <Analytics />
       <LanguageProvider>
       <BrowserRouter>
         <Routes>
