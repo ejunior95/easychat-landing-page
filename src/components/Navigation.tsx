@@ -27,9 +27,20 @@ export const Navigation = () => {
 
   const handleNavigation = (target: string) => {
     setIsOpen(false);
-
     if (target.startsWith('http')) {
       window.open(target, '_blank');
+      return;
+    }
+
+    if (target === '/') {
+      if (location.pathname === '/') {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        navigate('/');
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 100);
+      }
       return;
     }
 
