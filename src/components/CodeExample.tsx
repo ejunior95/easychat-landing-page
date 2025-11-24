@@ -37,7 +37,6 @@ const CodeBlock = ({ code, codeLanguage }: { code: string; codeLanguage: string 
         )}
       </button>
 
-      {/* Renderizador de Código Colorido */}
       <div className="text-sm">
         <SyntaxHighlighter
           language={codeLanguage}

@@ -16,7 +16,7 @@ const AboutContent = () => {
 
   return (
     <div className="min-h-screen bg-background text-foreground pt-24 pb-12">
-      {/* Background Gradients */}
+
       <div className="fixed inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 -z-10" />
       
       <div className="container mx-auto px-4 max-w-4xl">
@@ -53,7 +53,6 @@ const AboutContent = () => {
             </Card>
           </motion.div>
 
-          {/* Values Section */}
           <div className="grid sm:grid-cols-3 gap-6 mt-8">
             {values.map((item, idx) => {
               const Icon = item.icon;

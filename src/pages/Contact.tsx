@@ -27,7 +27,7 @@ const ContactContent = () => {
         </motion.div>
 
         <div className="grid md:grid-cols-2 gap-6 max-w-2xl mx-auto w-full">
-          {/* WhatsApp Card */}
+
           <motion.a
             href="https://wa.me/5515988309658"
             target="_blank"
@@ -42,7 +42,7 @@ const ContactContent = () => {
                 <MessageCircle size={32} />
               </div>
               <h3 className="text-xl font-semibold mb-2">{t('contact.whatsapp')}</h3>
-              <p className="text-muted-foreground">(15) 98830-9658</p>
+              <p className="text-muted-foreground">+55 (15) 98830-9658</p>
             </Card>
           </motion.a>
 

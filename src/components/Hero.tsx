@@ -14,7 +14,7 @@ export const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-x-hidden">
-      {/* Background Gradients */}
+
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 -z-10" />
       <div className="absolute top-0 inset-x-0 h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background -z-10 opacity-70" />
       
@@ -85,9 +85,8 @@ export const Hero = () => {
             </div>
           </motion.div>
 
-          {/* Right Column: Image */}
           <motion.div
-            initial={{ opacity: 0, y: 40 }} // Mudado de X para Y para mobile ficar melhor
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="relative mx-auto max-w-[500px] lg:max-w-none"
@@ -99,11 +98,10 @@ export const Hero = () => {
                 className="w-full h-auto object-cover"
                 loading="eager"
               />
-              {/* Overlay gradient para suavizar */}
+
               <div className="absolute inset-0 ring-1 ring-inset ring-white/10 rounded-2xl pointer-events-none" />
             </div>
             
-            {/* Decorative Blurs */}
             <div className="absolute -top-12 -right-12 h-64 w-64 rounded-full bg-primary/20 blur-[100px] -z-10 animate-pulse" />
             <div className="absolute -bottom-12 -left-12 h-64 w-64 rounded-full bg-secondary/20 blur-[100px] -z-10 animate-pulse" style={{ animationDelay: '1s' }} />
           </motion.div>

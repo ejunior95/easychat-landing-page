@@ -77,9 +77,9 @@ NLP AND BEHAVIOR:
 - Whenever mentioning price, emphasize that it is a ** ONE - TIME PAYMENT ** (no monthly fees).
 `;
 
-const handleHistoryChange = (messages) => {
-  console.log("Current Chat History:", messages);
-};
+// const handleHistoryChange = (messages) => {
+//   console.log("Current Chat History:", messages);
+// };
 
 const MainLayout = () => {
   const { language } = useLanguage();
@@ -98,7 +98,6 @@ const MainLayout = () => {
           language: language,
           systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
           initialMessage: language === 'pt' ? "Olá! Precisa de ajuda com a EasyChat?" : "Hi there! Need help with EasyChat?",
-          onHistoryChange: handleHistoryChange,
           api: {
             proxyUrl: "https://easy-chat-brown.vercel.app/api",
           }

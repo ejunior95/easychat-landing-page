@@ -129,7 +129,7 @@ export const Navigation = () => {
       className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg"
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
-        {/* Logo */}
+
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation('/')}>
           <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-sm shadow-lg">
             <span>💬</span>
@@ -139,20 +139,17 @@ export const Navigation = () => {
           </span>
         </div>
 
-        {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-8">
           <NavLinks />
         </div>
 
-        {/* Actions Area (Language + CTA) */}
         <div className="hidden lg:flex items-center gap-3">
           <LanguageSelector />
           <div className="w-px h-6 bg-border/50 mx-1" />
         </div>
 
-        {/* Mobile Menu Toggle */}
         <div className="lg:hidden flex items-center gap-2">
-          <LanguageSelector /> {/* Idioma aparece no mobile tbm fora do menu */}
+          <LanguageSelector />
 
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
