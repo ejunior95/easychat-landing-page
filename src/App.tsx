@@ -2,14 +2,14 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom"; // Adicionado Outlet
+import { BrowserRouter, Routes, Route, Outlet } from "react-router-dom";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import About from "./pages/About";
-import Contact from "./pages/Contact"; // Corrigido: Importando a página, não o ícone
+import Contact from "./pages/Contact";
 import { EasyChat } from '@ejunior95/easy-chat';
 import '@ejunior95/easy-chat/dist/style.css';
-import { ChatCTA } from "@/components/ChatCta"; // Opcional: Se quiser manter o balão chamativo
+import { ChatCTA } from "@/components/ChatCta";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 
 const queryClient = new QueryClient();
@@ -99,6 +99,9 @@ const MainLayout = () => {
           systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
           initialMessage: language === 'pt' ? "Olá! Precisa de ajuda com a EasyChat?" : "Hi there! Need help with EasyChat?",
           onHistoryChange: handleHistoryChange,
+          api: {
+            proxyUrl: "https://easy-chat-brown.vercel.app/api",
+          }
         }}
       />
     </>
