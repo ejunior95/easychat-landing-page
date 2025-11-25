@@ -100,7 +100,7 @@ const MainLayout = () => {
           systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
           initialMessage: language === 'pt' ? "Olá! Precisa de ajuda com a EasyChat?" : "Hi there! Need help with EasyChat?",
           api: {
-            proxyUrl: "https://easy-chat-brown.vercel.app/api",
+            proxyUrl: "https://easy-chat-rho.vercel.app/api",
           }
         }}
       />
