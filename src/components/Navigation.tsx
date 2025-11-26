@@ -137,12 +137,12 @@ export const Navigation = () => {
       initial={{ y: -100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ duration: 0.5 }}
-      className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/80 backdrop-blur-lg"
+      className="fixed top-0 left-0 right-0 z-50 border-b border-border/50 bg-background/70 backdrop-blur-sm"
     >
       <div className="container mx-auto flex h-16 items-center justify-between px-4 max-w-7xl">
 
         <div className="flex items-center gap-2 cursor-pointer" onClick={() => handleNavigation('/')}>
-          <div className="h-8 w-8 rounded-lg bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-sm shadow-lg">
+          <div className="h-8 w-8 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center font-bold text-white text-sm shadow-lg">
             <span>💬</span>
           </div>
           <span className="text-lg sm:text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-foreground to-foreground/70">
@@ -170,8 +170,8 @@ export const Navigation = () => {
             </SheetTrigger>
             <SheetContent side="right" className="w-[300px] sm:w-[400px]">
               <SheetHeader>
-                <SheetTitle className="text-left flex items-center gap-2">
-                  <div className="h-7 w-7 rounded-md bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs">💬</div>
+                <SheetTitle className="text-left flex items-center gap-2" onClick={() => handleNavigation('/')}>
+                  <div className="h-7 w-7 rounded-full bg-gradient-to-br from-primary to-secondary flex items-center justify-center text-white text-xs">💬</div>
                   EasyChat
                 </SheetTitle>
               </SheetHeader>
