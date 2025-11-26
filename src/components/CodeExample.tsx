@@ -27,7 +27,7 @@ interface PlaygroundConfig {
 }
 
 const defaultConfig: PlaygroundConfig = {
-  title: "Playground Bot 🤖",
+  title: "Playground ChatBot (TESTE) 🤖",
   position: "bottom-left",
   primaryColor: "#10b981",
   theme: "system",
@@ -141,7 +141,7 @@ function App() {
         }} 
       />
 
-      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/5 to-background" />
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
       
       <div className="container relative z-10 mx-auto px-4 max-w-7xl">
         <motion.div
@@ -165,7 +165,7 @@ function App() {
             viewport={{ once: true }}
             className="lg:col-span-2 space-y-6"
           >
-            <Card className="border-border/50 bg-card/50 backdrop-blur h-auto lg:h-full">
+            <Card className="border-border/90 bg-card/35 backdrop-blur h-auto lg:h-full">
               <CardContent className="p-6 space-y-6">
                 <div className="flex items-center justify-between border-b border-border/50 pb-4">
                   <div className="flex items-center gap-2 text-primary font-semibold">
@@ -280,7 +280,7 @@ function App() {
             className="lg:col-span-3"
           >
 
-            <Card className="border-border/50 bg-card/50 backdrop-blur shadow-2xl h-auto lg:h-full flex flex-col">
+            <Card className="border-border/90 bg-card/35 backdrop-blur shadow-2xl h-auto lg:h-full flex flex-col">
               <CardContent className="p-4 sm:p-6 flex-1">
                 <Tabs defaultValue="install" className="w-full h-full flex flex-col">
                   <TabsList className="grid w-full grid-cols-2 mb-6">
