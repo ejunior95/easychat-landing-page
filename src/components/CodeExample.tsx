@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "@/contexts/LanguageContext";
-import { motion } from "framer-motion";
+import { motion, useInView } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Check, Copy, RotateCcw, Settings2 } from "lucide-react";
@@ -16,6 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { EasyChat } from '@ejunior95/easy-chat';
+import { useChatContext } from "@/contexts/ChatContext";
 
 interface PlaygroundConfig {
   title: string;
@@ -99,6 +100,16 @@ export const CodeExample = () => {
   const { t, language } = useLanguage();
   const [config, setConfig] = useState<PlaygroundConfig>(defaultConfig);
   
+  const sectionRef = useRef(null);
+  const isInView = useInView(sectionRef, { amount: 0.2, once: false });
+  const { setPlaygroundVisible } = useChatContext();
+
+  // Sincroniza a visibilidade com o Contexto Global
+  useEffect(() => {
+    setPlaygroundVisible(isInView);
+    return () => setPlaygroundVisible(false);
+  }, [isInView, setPlaygroundVisible]);
+
   const handleReset = () => setConfig(defaultConfig);
 
   const installCode = `npm install @ejunior95/easy-chat`;
@@ -130,16 +141,25 @@ function App() {
 }`;
 
   return (
-    <section id="get-started" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
-      <EasyChat 
-        key={JSON.stringify(config)}
-        config={{
-          ...config,
-          systemPrompt: "You are a playground bot. Keep answers short.",
-          // @ts-ignore
-          isPlayground: true,
-        }} 
-      />
+    <section ref={sectionRef} id="get-started" className="py-16 sm:py-24 lg:py-32 relative overflow-hidden">
+      
+      <div 
+        className={`transition-opacity duration-500 ease-in-out ${
+          isInView 
+            ? "opacity-100 pointer-events-auto" 
+            : "opacity-0 pointer-events-none"
+        }`}
+      >
+        <EasyChat 
+          key={JSON.stringify(config)}
+          config={{
+            ...config,
+            systemPrompt: "You are a playground bot. Keep answers short.",
+            // @ts-ignore
+            isPlayground: true,
+          }} 
+        />
+      </div>
 
       <div className="absolute inset-0 bg-gradient-to-b from-background via-primary/10 to-background" />
       

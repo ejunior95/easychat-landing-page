@@ -27,7 +27,7 @@ const { language } = useLanguage();
             duration: 2,
             ease: "easeInOut",
           }}
-          className="mr-[0.85rem] drop-shadow-lg" 
+          className="mr-[0.85rem] mb-4 drop-shadow-lg" 
         >
           <ArrowDown className="h-8 w-8 text-primary" strokeWidth={3} />
         </motion.div>
