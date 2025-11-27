@@ -165,9 +165,9 @@ function App() {
             viewport={{ once: true }}
             className="lg:col-span-2 space-y-6"
           >
-            <Card className="border-border/90 bg-card/35 backdrop-blur h-auto lg:h-full">
+            <Card className="border-border/90 bg-card/35 backdrop-blur h-auto">
               <CardContent className="p-6 space-y-6">
-                <div className="flex items-center justify-between border-b border-border/50 pb-4">
+                <div className="flex items-center justify-between border-b border-muted-foreground/15 pb-4">
                   <div className="flex items-center gap-2 text-primary font-semibold">
                     <Settings2 className="h-5 w-5" />
                     <h3>{language === 'pt' ? 'Playground ao vivo ' : 'Live Playground' }</h3>
@@ -280,7 +280,7 @@ function App() {
             className="lg:col-span-3"
           >
 
-            <Card className="border-border/90 bg-card/35 backdrop-blur shadow-2xl h-auto lg:h-full flex flex-col">
+            <Card className="border-border/90 bg-card/35 backdrop-blur shadow-2xl h-auto flex flex-col">
               <CardContent className="p-4 sm:p-6 flex-1">
                 <Tabs defaultValue="install" className="w-full h-full flex flex-col">
                   <TabsList className="grid w-full grid-cols-2 mb-6">

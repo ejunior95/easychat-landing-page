@@ -19,7 +19,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
           <div className="space-y-4">
             <div className="flex items-center gap-2">
-              <div className="h-8 w-8 rounded-lg bg-gradient-primary flex items-center justify-center font-bold text-background">
+              <div className="h-8 w-8 rounded-full bg-gradient-primary flex items-center justify-center font-bold text-background">
                 <span>💬</span>
               </div>
               <span className="text-xl font-bold">EasyChat</span>

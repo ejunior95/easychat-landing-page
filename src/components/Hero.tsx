@@ -15,8 +15,8 @@ export const Hero = () => {
   return (
     <section className="relative min-h-screen flex items-center justify-center pt-20 overflow-x-hidden">
 
-      <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-background to-secondary/5 -z-10" />
-      <div className="absolute top-0 inset-x-0 h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary/20 via-background to-background -z-10 opacity-70" />
+      <div className="absolute inset-0 bg-gradient-to-br from-primary via-background to-secondary/5 -z-10" />
+      <div className="absolute top-0 inset-x-0 h-[500px] bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-primary via-background to-background -z-10" />
       
       <div className="container relative z-10 mx-auto px-4 py-12 sm:py-20 max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-12 items-center">
