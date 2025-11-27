@@ -12,6 +12,7 @@ import '@ejunior95/easy-chat/dist/style.css';
 import { ChatCTA } from "@/components/ChatCta";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { Analytics } from "@vercel/analytics/react";
+import { ChatProvider, useChatContext } from "./contexts/ChatContext";
 
 const queryClient = new QueryClient();
 
@@ -84,26 +85,35 @@ NLP AND BEHAVIOR:
 
 const MainLayout = () => {
   const { language } = useLanguage();
+  const { isPlaygroundVisible } = useChatContext();
+
   return (
     <>
       <Outlet />
       
-      <ChatCTA />
-      
-      <EasyChat
-        config={{
-          title: "EasyBot 🤖",
-          position: "bottom-right",
-          primaryColor: "#0067E2",
-          theme: "dark",
-          language: language,
-          systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
-          initialMessage: language === 'pt' ? "Olá! Precisa de ajuda com a EasyChat?" : "Hi there! Need help with EasyChat?",
-          api: {
-            proxyUrl: "https://easy-chat-rho.vercel.app/api",
-          }
-        }}
-      />
+      <div 
+        className={`transition-opacity duration-300 ${
+          isPlaygroundVisible 
+            ? 'opacity-0 pointer-events-none' 
+            : 'opacity-100 pointer-events-auto'
+        }`}
+      >
+        <ChatCTA />
+        <EasyChat
+          config={{
+            title: "EasyBot 🤖",
+            position: "bottom-right",
+            primaryColor: "#0067E2",
+            theme: "dark",
+            language: language,
+            systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
+            initialMessage: language === 'pt' ? "Olá! Precisa de ajuda com a EasyChat?" : "Hi there! Need help with EasyChat?",
+            api: {
+              proxyUrl: "https://easy-chat-rho.vercel.app/api",
+            }
+          }}
+        />
+      </div>
     </>
   );
 };
@@ -111,24 +121,23 @@ const MainLayout = () => {
 const App = () => (
   <QueryClientProvider client={queryClient}>
     <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <Analytics />
-      <LanguageProvider>
-      <BrowserRouter>
-        <Routes>
-          
-          <Route element={<MainLayout />}>
-            <Route path="/" element={<Index />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/contact" element={<Contact />} />
-          </Route>
-
-          <Route path="*" element={<NotFound />} />
-          
-        </Routes>
-      </BrowserRouter>
-      </LanguageProvider>
+      <ChatProvider>
+        <Toaster />
+        <Sonner />
+        <Analytics />
+        <LanguageProvider>
+          <BrowserRouter>
+            <Routes>
+              <Route element={<MainLayout />}>
+                <Route path="/" element={<Index />} />
+                <Route path="/about" element={<About />} />
+                <Route path="/contact" element={<Contact />} />
+              </Route>
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </BrowserRouter>
+        </LanguageProvider>
+      </ChatProvider>
     </TooltipProvider>
   </QueryClientProvider>
 );
