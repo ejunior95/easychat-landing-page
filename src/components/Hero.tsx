@@ -2,8 +2,7 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImagePT from "@/assets/hero-chat.png";
-import heroImageEN from "@/assets/hero-chat-en.png";
+import heroImage from "@/assets/hero-chat.png";
 
 export const Hero = () => {
   const { t, language } = useLanguage();
@@ -92,11 +91,11 @@ export const Hero = () => {
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
             className="relative mx-auto max-w-[500px] lg:max-w-none"
           >
-            <div className="relative rounded-2xl overflow-hidden border border-border/50 shadow-2xl bg-background/50 backdrop-blur-sm">
+            <div className="relative rounded-2xl lg:rounded-3xl overflow-hidden shadow-2xl bg-background/50 backdrop-blur-sm">
               <img 
-                src={ language === 'pt' ? heroImagePT : heroImageEN } 
+                src={ heroImage } 
                 alt="EasyChat Interface" 
-                className="w-full h-auto object-cover"
+                className="w-full h-[30dvh] lg:h-[45dvh] object-cover"
                 loading="eager"
               />
 
