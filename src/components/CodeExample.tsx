@@ -151,7 +151,6 @@ function App() {
         }`}
       >
         <EasyChat 
-          key={JSON.stringify(config)}
           config={{
             ...config,
             systemPrompt: "You are a playground bot. Keep answers short.",
