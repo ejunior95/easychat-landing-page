@@ -2,10 +2,11 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-chat.png";
+import heroImagePT from "@/assets/hero-chat.png";
+import heroImageEN from "@/assets/hero-chat-en.png";
 
 export const Hero = () => {
-  const { t } = useLanguage();
+  const { t, language } = useLanguage();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
@@ -93,7 +94,7 @@ export const Hero = () => {
           >
             <div className="relative rounded-2xl overflow-hidden border border-border/50 shadow-2xl bg-background/50 backdrop-blur-sm">
               <img 
-                src={heroImage} 
+                src={ language === 'pt' ? heroImagePT : heroImageEN } 
                 alt="EasyChat Interface" 
                 className="w-full h-auto object-cover"
                 loading="eager"
