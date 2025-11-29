@@ -109,7 +109,7 @@ export const Pricing = () => {
           <Card className="flex flex-col border-primary shadow-glow relative overflow-hidden h-full bg-card/50 backdrop-blur-sm">
             <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs px-3 py-1 rounded-bl-lg font-medium flex items-center gap-1">
               <Sparkles className="h-3 w-3" />
-              Best Value
+              {language === 'en' ? 'Best Value' : 'Melhor Custo-Benefício'}
             </div>
             <CardHeader>
               <CardTitle className="text-2xl text-primary">{t('pricing.pro.title')}</CardTitle>
@@ -120,7 +120,7 @@ export const Pricing = () => {
                 </span>
                 <div className="flex items-baseline gap-1">
                   <span className="text-5xl font-bold">
-                    {language === 'pt' ? 'R$ 49,90' : '$19,90'}
+                    {language === 'pt' ? 'R$ 49,90' : '$29,90'}
                   </span>
                 </div>
               </div>
@@ -149,30 +149,36 @@ export const Pricing = () => {
               <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
                 <DialogContent>
                   <DialogHeader>
-                    <DialogTitle>Configure sua Licença</DialogTitle>
+                    <DialogTitle>{language === 'pt' ? 'Configure sua Licença' : 'License Setup'}</DialogTitle>
                     <DialogDescription>
-                      Onde você vai usar o EasyChat? (Ex: meudominio.com)
+                      {language === 'pt' ? 'Onde você vai usar o EasyChat? (Ex: meudominio.com)' : 'Where will you use EasyChat? (e.g., mydomain.com)'}
                       <br />
                       <span className="text-xs text-muted-foreground">
-                        *Sua licença funcionará neste site e em localhost automaticamente.
+                        {language === 'pt' ? '*Sua licença funcionará neste site e em localhost automaticamente.' : '*Your license will work on this site and on localhost automatically.'}
                       </span>
                     </DialogDescription>
                   </DialogHeader>
                   <div className="grid gap-4 py-4">
                     <div className="grid gap-2">
-                      <Label htmlFor="domain">Domínio do Site</Label>
+                      <Label htmlFor="domain">{language === 'pt' ? 'Domínio do Site' : 'Your domain'}</Label>
                       <Input
                         id="domain"
-                        placeholder="exemplo.com.br"
+                        placeholder={language === 'pt' ? "exemplo.com.br" : "example.com"}
                         value={domain}
                         onChange={(e) => setDomain(e.target.value)}
                       />
                     </div>
                   </div>
                   <DialogFooter>
-                    <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
-                      {isLoading ? "Processando..." : "Ir para Pagamento"}
-                    </Button>
+                    {language === 'pt' ? (
+                      <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
+                        {isLoading && language === 'pt' ? "Processando..." : "Ir para Pagamento"}
+                      </Button>
+                    ) : (
+                      <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
+                        {isLoading && language === 'en' ? "Processing..." : "Proceed to Payment"}
+                      </Button>
+                    )}
                   </DialogFooter>
                 </DialogContent>
               </Dialog>
