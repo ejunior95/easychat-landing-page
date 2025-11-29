@@ -8,18 +8,58 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+  DialogFooter
+} from "@/components/ui/dialog";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/contexts/LanguageContext";
+import { useState } from "react";
+
 
 export const Pricing = () => {
   const { t, language } = useLanguage();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [domain, setDomain] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
-  // TODO: Substitua pelos seus links de pagamento do Stripe reais
-  const STRIPE_LINK_BRL = "https://buy.stripe.com/SEU_LINK_REAIS";
-  const STRIPE_LINK_USD = "https://buy.stripe.com/SEU_LINK_DOLAR";
 
-  const handleSubscribe = () => {
-    const checkoutUrl = language === 'pt' ? STRIPE_LINK_BRL : STRIPE_LINK_USD;
-    window.open(checkoutUrl, '_blank');
+  const BASE_URL = import.meta.env.API_BASE_URL;
+  const PRICE_ID_BRL = import.meta.env.PRICE_ID_BRL;
+  const PRICE_ID_USD = import.meta.env.PRICE_ID_USD;
+
+  const handleSubscribeClick = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleConfirmPurchase = async () => {
+    if (!domain) return;
+    setIsLoading(true);
+
+    try {
+      const response = await fetch(`${BASE_URL}/checkout`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          domain: domain,
+          priceId: language === 'pt' ? PRICE_ID_BRL : PRICE_ID_USD
+        })
+      });
+
+      const data = await response.json();
+      if (data.url) {
+        window.location.href = data.url;
+      }
+    } catch (error) {
+      console.error("Erro ao iniciar checkout", error);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -55,8 +95,8 @@ export const Pricing = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button 
-                className="w-full" 
+              <Button
+                className="w-full"
                 variant="outline"
                 onClick={() => window.open('https://www.npmjs.com/package/@ejunior95/easy-chat', '_blank')}
               >
@@ -69,18 +109,18 @@ export const Pricing = () => {
           <Card className="flex flex-col border-primary shadow-glow relative overflow-hidden h-full bg-card/50 backdrop-blur-sm">
             <div className="absolute top-0 right-0 bg-primary text-primary-foreground text-xs px-3 py-1 rounded-bl-lg font-medium flex items-center gap-1">
               <Sparkles className="h-3 w-3" />
-              Best Value
+              {language === 'en' ? 'Best Value' : 'Melhor Custo-Benefício'}
             </div>
             <CardHeader>
               <CardTitle className="text-2xl text-primary">{t('pricing.pro.title')}</CardTitle>
               <CardDescription>{t('pricing.pro.desc')}</CardDescription>
               <div className="mt-6 flex flex-col justify-start items-start">
-                  <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full w-1/2 flex items-center justify-center">
-                    {t('pricing.pro.period')}
-                  </span>
+                <span className="text-sm font-medium text-muted-foreground bg-muted px-2 py-1 rounded-full w-1/2 flex items-center justify-center">
+                  {t('pricing.pro.period')}
+                </span>
                 <div className="flex items-baseline gap-1">
                   <span className="text-5xl font-bold">
-                    {language === 'pt' ? 'R$ 49,90' : '$19,90'}
+                    {language === 'pt' ? 'R$ 49,90' : '$29,90'}
                   </span>
                 </div>
               </div>
@@ -98,20 +138,59 @@ export const Pricing = () => {
               </ul>
             </CardContent>
             <CardFooter>
-              <Button 
-                className="w-full bg-primary hover:opacity-90 shadow-lg shadow-primary/20 text-lg h-12" 
-                onClick={handleSubscribe}
+              <Button
+                className="w-full bg-primary hover:opacity-90 shadow-lg shadow-primary/20 text-lg h-12"
+                onClick={handleSubscribeClick}
               >
                 {t('pricing.pro.cta')}
               </Button>
+
+              {/* Modal para pedir o domínio */}
+              <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+                <DialogContent>
+                  <DialogHeader>
+                    <DialogTitle>{language === 'pt' ? 'Configure sua Licença' : 'License Setup'}</DialogTitle>
+                    <DialogDescription>
+                      {language === 'pt' ? 'Onde você vai usar o EasyChat? (Ex: meudominio.com)' : 'Where will you use EasyChat? (e.g., mydomain.com)'}
+                      <br />
+                      <span className="text-xs text-muted-foreground">
+                        {language === 'pt' ? '*Sua licença funcionará neste site e em localhost automaticamente.' : '*Your license will work on this site and on localhost automatically.'}
+                      </span>
+                    </DialogDescription>
+                  </DialogHeader>
+                  <div className="grid gap-4 py-4">
+                    <div className="grid gap-2">
+                      <Label htmlFor="domain">{language === 'pt' ? 'Domínio do Site' : 'Your domain'}</Label>
+                      <Input
+                        id="domain"
+                        placeholder={language === 'pt' ? "exemplo.com.br" : "example.com"}
+                        value={domain}
+                        onChange={(e) => setDomain(e.target.value)}
+                      />
+                    </div>
+                  </div>
+                  <DialogFooter>
+                    {language === 'pt' ? (
+                      <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
+                        {isLoading && language === 'pt' ? "Processando..." : "Ir para Pagamento"}
+                      </Button>
+                    ) : (
+                      <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
+                        {isLoading && language === 'en' ? "Processing..." : "Proceed to Payment"}
+                      </Button>
+                    )}
+                  </DialogFooter>
+                </DialogContent>
+              </Dialog>
+
             </CardFooter>
           </Card>
         </div>
-        
+
         <div className="mt-12 text-center">
           <p className="text-sm text-muted-foreground">
-            {language === 'pt' 
-              ? 'Pagamento seguro via Stripe.' 
+            {language === 'pt'
+              ? 'Pagamento seguro via Stripe.'
               : 'Secure payment via Stripe.'}
           </p>
         </div>
