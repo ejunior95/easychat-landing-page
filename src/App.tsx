@@ -86,6 +86,7 @@ NLP AND BEHAVIOR:
 const MainLayout = () => {
   const { language } = useLanguage();
   const { isPlaygroundVisible } = useChatContext();
+  const licenseKey = import.meta.env.VITE_EASYCHAT_LICENSE;
 
   return (
     <>
@@ -109,7 +110,7 @@ const MainLayout = () => {
             language: language,
             systemPrompt: language === 'pt' ? salesSystemPromptPT : salesSystemPromptEN,
             initialMessage: language === 'pt' ? "Olá! Precisa de alguma ajuda com o EasyChat?" : "Hi there! Need some help with EasyChat?",
-            licenseKey: import.meta.env.VITE_EASYCHAT_LICENSE
+            licenseKey
           }}
         />
       </div>
