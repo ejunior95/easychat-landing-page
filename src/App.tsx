@@ -100,6 +100,7 @@ const MainLayout = () => {
       >
         <ChatCTA />
         <EasyChat
+          key={language}
           config={{
             title: "EasyBot 🤖",
             position: "bottom-right",
