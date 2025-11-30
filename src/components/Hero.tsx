@@ -2,10 +2,10 @@ import { Button } from "@/components/ui/button";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { ArrowRight, Sparkles, CheckCircle2 } from "lucide-react";
 import { motion } from "framer-motion";
-import heroImage from "@/assets/hero-chat.png";
+import heroImage from "@/assets/hero-chat.avif";
 
 export const Hero = () => {
-  const { t, language } = useLanguage();
+  const { t } = useLanguage();
 
   const scrollToSection = (id: string) => {
     const element = document.getElementById(id);
