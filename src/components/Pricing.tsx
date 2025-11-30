@@ -29,9 +29,9 @@ export const Pricing = () => {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const baseUrl = import.meta.env.BASE_URL;
-  const priceIdBr = import.meta.env.PRICE_ID_BRL;
-  const priceIdUsd = import.meta.env.PRICE_ID_USD;
+  const baseUrl = import.meta.env.VITE_BASE_URL;
+  const priceIdBr = import.meta.env.VITE_PRICE_ID_BRL;
+  const priceIdUsd = import.meta.env.VITE_PRICE_ID_USD;
 
   const handleSubscribeClick = () => {
     setIsDialogOpen(true);
@@ -42,7 +42,7 @@ export const Pricing = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${baseUrl}checkout`, {
+      const response = await fetch(`${baseUrl}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
