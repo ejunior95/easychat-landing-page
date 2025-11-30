@@ -16,10 +16,10 @@ import {
   DialogDescription,
   DialogFooter
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useLanguage } from "@/contexts/LanguageContext";
 import { useState } from "react";
+import FormAI from "./FormAi";
 
 
 export const Pricing = () => {
@@ -27,6 +27,7 @@ export const Pricing = () => {
   const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [domain, setDomain] = useState("");
   const [isLoading, setIsLoading] = useState(false);
+  const [isDomainValid, setIsDomainValid] = useState(false);
 
 
   const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -76,7 +77,7 @@ export const Pricing = () => {
 
         <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {/* Free Tier */}
-          <Card className="flex flex-col border-border/50 shadow-sm hover:shadow-md transition-all h-full">
+          <Card className="flex flex-col border-border shadow-sm hover:shadow-md transition-all h-full">
             <CardHeader>
               <CardTitle className="text-2xl">{t('pricing.free.title')}</CardTitle>
               <CardDescription>{t('pricing.free.desc')}</CardDescription>
@@ -161,21 +162,31 @@ export const Pricing = () => {
                   <div className="grid gap-4 py-4">
                     <div className="grid gap-2">
                       <Label htmlFor="domain">{language === 'pt' ? 'Domínio do Site' : 'Your domain'}</Label>
-                      <Input
-                        id="domain"
-                        placeholder={language === 'pt' ? "exemplo.com.br" : "example.com"}
-                        value={domain}
-                        onChange={(e) => setDomain(e.target.value)}
+                      <FormAI
+                        prompt="Campo de texto para domínio de internet (ex: meudominio.com). Use validação REGEX para garantir o formato correto de URL/Domínio. Não use máscara de tamanho fixo."
+                        onChange={(value) => setDomain(value)}
+                        onValidate={(isValid) => setIsDomainValid(isValid)}
+                        onEnter={() => {
+                          if (!isLoading) {
+                            handleConfirmPurchase();
+                          }
+                        }}
                       />
                     </div>
                   </div>
                   <DialogFooter>
                     {language === 'pt' ? (
-                      <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
+                      <Button
+                        onClick={handleConfirmPurchase}
+                        disabled={isLoading || !isDomainValid}
+                      >
                         {isLoading && language === 'pt' ? "Processando..." : "Ir para Pagamento"}
                       </Button>
                     ) : (
-                      <Button onClick={handleConfirmPurchase} disabled={isLoading || !domain}>
+                      <Button
+                        onClick={handleConfirmPurchase}
+                        disabled={isLoading || !isDomainValid}
+                      >
                         {isLoading && language === 'en' ? "Processing..." : "Proceed to Payment"}
                       </Button>
                     )}
