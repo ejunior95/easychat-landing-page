@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 type Language = 'en' | 'pt';
 
@@ -16,7 +16,7 @@ const translations = {
     'nav.docs': 'Documentation',
     'nav.faq': 'FAQ',
     'nav.getStarted': 'Get Started',
-    
+
     // Hero
     'hero.title': 'The AI Chat Widget',
     'hero.subtitle': 'for React Developers',
@@ -24,7 +24,7 @@ const translations = {
     'hero.cta.primary': 'Start Building',
     'hero.cta.secondary': 'View Documentation',
     'hero.badge': 'Zero Configuration Required',
-    
+
     // Features
     'features.title': 'Everything You Need',
     'features.subtitle': 'Built for developers who value security, speed, and simplicity',
@@ -40,13 +40,13 @@ const translations = {
     'features.themeable.desc': 'Built-in dark, light, and system mode. Customize colors to match your brand perfectly.',
     'features.typescript.title': 'Type-Safe',
     'features.typescript.desc': 'Written in TypeScript with full type definitions for a better development experience.',
-    
+
     // Code
     'code.title': 'Get Started in Seconds',
     'code.subtitle': 'Install the package and add the component to your app',
     'code.step1': 'Install via npm',
     'code.step2': 'Import and configure',
-    
+
     // Pricing
     'pricing.title': 'Simple, Transparent Pricing',
     'pricing.subtitle': 'Pay once, use forever. No recurring fees.',
@@ -58,7 +58,7 @@ const translations = {
     'pricing.free.feature3': 'Markdown rendering',
     'pricing.free.feature4': 'Community support',
     'pricing.free.cta': 'Install Now',
-    
+
     'pricing.pro.title': 'Lifetime License',
     'pricing.pro.price': '$29',
     'pricing.pro.period': 'one-time payment',
@@ -69,7 +69,7 @@ const translations = {
     'pricing.pro.feature4': 'Free Updates Forever',
     'pricing.pro.feature5': 'Advanced Customization',
     'pricing.pro.cta': 'Get Lifetime Access',
-    
+
     // FAQ
     'faq.title': 'Frequently Asked Questions',
     'faq.q1': 'Is this a subscription?',
@@ -82,7 +82,7 @@ const translations = {
     'faq.a4': 'Yes! EasyChat works with any React-based framework including Next.js, Create React App, Vite, and more.',
     'faq.q5': 'What if I need help?',
     'faq.a5': 'Lifetime license holders get priority support via email and GitHub issues.',
-    
+
     // Footer
     'footer.product': 'Product',
     'footer.features': 'Features',
@@ -124,7 +124,7 @@ const translations = {
     'nav.docs': 'Documentação',
     'nav.faq': 'FAQ',
     'nav.getStarted': 'Começar',
-    
+
     // Hero
     'hero.title': 'O Widget de Chat IA',
     'hero.subtitle': 'para Desenvolvedores React',
@@ -132,7 +132,7 @@ const translations = {
     'hero.cta.primary': 'Começar a Construir',
     'hero.cta.secondary': 'Ver Documentação',
     'hero.badge': 'Zero Configuração Necessária',
-    
+
     // Features
     'features.title': 'Tudo que Você Precisa',
     'features.subtitle': 'Construído para desenvolvedores que valorizam segurança, velocidade e simplicidade',
@@ -148,13 +148,13 @@ const translations = {
     'features.themeable.desc': 'Modos escuro, claro e sistema integrados. Personalize cores para combinar perfeitamente com sua marca.',
     'features.typescript.title': 'Type-Safe',
     'features.typescript.desc': 'Escrito em TypeScript com definições de tipos completas para uma melhor experiência de desenvolvimento.',
-    
+
     // Code
     'code.title': 'Comece em Segundos',
     'code.subtitle': 'Instale o pacote e adicione o componente ao seu app',
     'code.step1': 'Instalar via npm',
     'code.step2': 'Importar e configurar',
-    
+
     // Pricing
     'pricing.title': 'Preços Simples',
     'pricing.subtitle': 'Pague uma vez, use para sempre. Sem mensalidades.',
@@ -166,7 +166,7 @@ const translations = {
     'pricing.free.feature3': 'Renderização Markdown',
     'pricing.free.feature4': 'Suporte da comunidade',
     'pricing.free.cta': 'Instalar Agora',
-    
+
     'pricing.pro.title': 'Licença Vitalícia',
     'pricing.pro.price': 'R$ 49,90',
     'pricing.pro.period': 'pagamento único',
@@ -177,7 +177,7 @@ const translations = {
     'pricing.pro.feature4': 'Atualizações Gratuitas',
     'pricing.pro.feature5': 'Customização Avançada',
     'pricing.pro.cta': 'Comprar Acesso Vitalício',
-    
+
     // FAQ
     'faq.title': 'Perguntas Frequentes',
     'faq.q1': 'Isso é uma assinatura mensal?',
@@ -190,7 +190,7 @@ const translations = {
     'faq.a4': 'Sim! EasyChat funciona com qualquer framework baseado em React incluindo Next.js, Create React App, Vite e mais.',
     'faq.q5': 'E se eu precisar de ajuda?',
     'faq.a5': 'Detentores da licença vitalícia têm suporte prioritário via email e GitHub.',
-    
+
     // Footer
     'footer.product': 'Produto',
     'footer.features': 'Recursos',
@@ -230,10 +230,33 @@ const translations = {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [language, setLanguage] = useState<Language>('pt');
+  // 1. Inicialização Inteligente do Idioma
+  const [language, setLanguageState] = useState<Language>(() => {
+    const saved = localStorage.getItem('easychat-language');
+    if (saved === 'pt' || saved === 'en') {
+      return saved;
+    }
+
+    // 2. Detectar o idioma do navegador
+    const browserLang = typeof navigator !== 'undefined' ? navigator.language.toLowerCase() : 'en';
+
+    // 3. Se começar com 'pt' (pt-BR, pt-PT), definimos Português
+    if (browserLang.startsWith('pt')) {
+      return 'pt';
+    }
+
+    // 4. Fallback: Para todo o resto do mundo, mostramos Inglês
+    return 'en';
+  });
+
+  const setLanguage = (lang: Language) => {
+    setLanguageState(lang);
+    localStorage.setItem('easychat-language', lang); // Persistência da escolha do usuário
+  };
 
   const t = (key: string): string => {
-    return translations[language][key] || key;
+    const currentDict = translations[language] || translations['en'];
+    return (currentDict as any)[key] || key;
   };
 
   return (
