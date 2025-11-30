@@ -29,9 +29,9 @@ export const Pricing = () => {
   const [isLoading, setIsLoading] = useState(false);
 
 
-  const BASE_URL = import.meta.env.API_BASE_URL;
-  const PRICE_ID_BRL = import.meta.env.PRICE_ID_BRL;
-  const PRICE_ID_USD = import.meta.env.PRICE_ID_USD;
+  const baseUrl = import.meta.env.BASE_URL;
+  const priceIdBr = import.meta.env.PRICE_ID_BRL;
+  const priceIdUsd = import.meta.env.PRICE_ID_USD;
 
   const handleSubscribeClick = () => {
     setIsDialogOpen(true);
@@ -42,12 +42,12 @@ export const Pricing = () => {
     setIsLoading(true);
 
     try {
-      const response = await fetch(`${BASE_URL}/checkout`, {
+      const response = await fetch(`${baseUrl}/checkout`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           domain: domain,
-          priceId: language === 'pt' ? PRICE_ID_BRL : PRICE_ID_USD
+          priceId: language === 'pt' ? priceIdBr : priceIdUsd
         })
       });
 
