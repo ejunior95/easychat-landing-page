@@ -13,6 +13,7 @@ import { ChatCTA } from "@/components/ChatCta";
 import { LanguageProvider, useLanguage } from "./contexts/LanguageContext";
 import { Analytics } from "@vercel/analytics/react";
 import { ChatProvider, useChatContext } from "./contexts/ChatContext";
+import Success from "./pages/Success";
 
 const queryClient = new QueryClient();
 
@@ -133,6 +134,7 @@ const App = () => (
                 <Route path="/about" element={<About />} />
                 <Route path="/contact" element={<Contact />} />
               </Route>
+              <Route path="/success" element={<Success />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </BrowserRouter>
