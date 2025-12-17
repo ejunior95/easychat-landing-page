@@ -3,7 +3,7 @@
   "author": "Edvaldo de Ramos Junior",
   "description": "Demo application for Easy Chat component library",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "module",
   "scripts": {
     "dev": "vite",
